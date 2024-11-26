@@ -9,7 +9,7 @@ public class Controller : MonoBehaviour
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
     public float gravity = 10f;
- 
+    public float weight = 0.72f;
  
     public float lookSpeed = 2f;
     public float lookXLimit = 45f;
@@ -35,12 +35,26 @@ public class Controller : MonoBehaviour
         #region Handles Movment
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
+        
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
- 
+        float curSpeedX = canMove ?  Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ?  Input.GetAxis("Horizontal") : 0;
+
+        Vector3 newMoveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        newMoveDirection.Normalize();
+        newMoveDirection *= isRunning ? runSpeed : walkSpeed;
+        moveDirection.x = newMoveDirection.x;
+        moveDirection.z = newMoveDirection.z;
+
+        if(Input.GetKey(KeyCode.Space )&& characterController.isGrounded){
+            moveDirection.y = 20f;
+        }
+        else if(characterController.isGrounded == false){
+            moveDirection.y += - gravity * Time.deltaTime * weight;
+        }
+        else{
+            moveDirection.y = 0;
+        }
         #endregion
  
         #region Handles Rotation

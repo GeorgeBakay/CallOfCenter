@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
-    public static MeshRenderer door_mesh;
+    public MeshRenderer door_mesh;
 
-    public static BoxCollider door_coll;
-    public static bool Door_closed = true;
+    public BoxCollider door_coll;
+    public bool Door_closed = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,7 +21,7 @@ public class DoorScript : MonoBehaviour
         
     }
 
-    public static void Open()   
+    public void Open()   
     {
         door_coll.isTrigger = true;
         door_mesh.enabled = false;
@@ -29,7 +29,7 @@ public class DoorScript : MonoBehaviour
         Door_closed = false;
     }
 
-    public static void Close()
+    public void Close()
     {
         door_coll.isTrigger = false;
         door_mesh.enabled = true;

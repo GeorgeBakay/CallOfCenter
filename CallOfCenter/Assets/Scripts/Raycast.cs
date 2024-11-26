@@ -7,7 +7,7 @@ public class Raycast : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -17,29 +17,38 @@ public class Raycast : MonoBehaviour
         RaycastHit hit;
         Vector3 rayOrigin = transform.position;
 
-        if (Physics.Raycast(rayOrigin,transform.forward, out hit,ray_l))
+        if (Physics.Raycast(rayOrigin, transform.forward, out hit, ray_l))
         {
             Transform objectHit = hit.transform;
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log(objectHit.gameObject.tag + "Hello");
+
                 // Debug.Log("!Е натиснуто!");
-                if(objectHit.gameObject.CompareTag("Notebook"))
+                if (objectHit.gameObject.CompareTag("Notebook"))
                 {
                     Debug.Log("Notebook clicked");
-                    if(LaptopScript.Laptop_close) LaptopScript.Open();
-                    
+                    if (LaptopScript.Laptop_close) LaptopScript.Open();
+
                 }
-                else if(objectHit.gameObject.CompareTag("Door"))
+                else if (objectHit.gameObject.CompareTag("Door"))
                 {
-                    if(DoorScript.Door_closed == true)
+                    Debug.Log("Door clicked");
+                    var door_script = objectHit.gameObject.GetComponent<DoorScript>();
+                    if (door_script != null)
                     {
-                        DoorScript.Open();
+                        if (door_script.Door_closed == true)
+                        {
+                            door_script.Open();
+                        }
+                        else
+                        {
+                            door_script.Close();
+                        }
                     }
-                    else
-                    {
-                        DoorScript.Close();
+                    else{
+                        Debug.Log("!!!Set Script for this door!!!");
                     }
+
                 }
             }
         }
