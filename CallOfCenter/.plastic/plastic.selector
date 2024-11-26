@@ -1,0 +1,4 @@
+repository "CallOfCenter 2024-11-26_23-16-02/CallOfCenter@7972403483350@cloud"
+  path "/"
+    br "/main"
+    co "/main"
