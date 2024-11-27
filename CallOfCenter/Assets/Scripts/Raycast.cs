@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Raycast : MonoBehaviour
@@ -27,7 +28,15 @@ public class Raycast : MonoBehaviour
                 if (objectHit.gameObject.CompareTag("Notebook"))
                 {
                     Debug.Log("Notebook clicked");
-                    if (LaptopScript.Laptop_close) LaptopScript.Open();
+                    var laptop_script = objectHit.gameObject.GetComponent<LaptopScript>();
+                    if(laptop_script != null){
+                        
+                        laptop_script.Open();
+
+                    }
+                    else{
+                         Debug.Log("!!!Set Script for this notebook!!!");
+                    }
 
                 }
                 else if (objectHit.gameObject.CompareTag("Door"))

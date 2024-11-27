@@ -32,7 +32,7 @@ public class DoorScript : MonoBehaviour
     public void Close()
     {
         door_coll.isTrigger = false;
-        door_mesh.enabled = true;
+        door_mesh.enabled =true;
         Debug.Log("Двері закрито");
         Door_closed = true;
     }

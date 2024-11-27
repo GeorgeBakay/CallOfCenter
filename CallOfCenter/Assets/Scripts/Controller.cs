@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
  
 [RequireComponent(typeof(CharacterController))]
@@ -41,13 +42,13 @@ public class Controller : MonoBehaviour
         float curSpeedY = canMove ?  Input.GetAxis("Horizontal") : 0;
 
         Vector3 newMoveDirection = (forward * curSpeedX) + (right * curSpeedY);
-        newMoveDirection.Normalize();
+        //newMoveDirection.Normalize();
         newMoveDirection *= isRunning ? runSpeed : walkSpeed;
         moveDirection.x = newMoveDirection.x;
         moveDirection.z = newMoveDirection.z;
 
         if(Input.GetKey(KeyCode.Space )&& characterController.isGrounded){
-            moveDirection.y = 20f;
+            moveDirection.y = 15f;
         }
         else if(characterController.isGrounded == false){
             moveDirection.y += - gravity * Time.deltaTime * weight;
