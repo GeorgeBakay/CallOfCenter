@@ -23,16 +23,13 @@ public class Raycast : MonoBehaviour
             Transform objectHit = hit.transform;
             if (Input.GetKeyDown(KeyCode.E))
             {
-
                 // Debug.Log("!Е натиснуто!");
                 if (objectHit.gameObject.CompareTag("Notebook"))
                 {
                     Debug.Log("Notebook clicked");
                     var laptop_script = objectHit.gameObject.GetComponent<LaptopScript>();
                     if(laptop_script != null){
-                        
                         laptop_script.Open();
-
                     }
                     else{
                          Debug.Log("!!!Set Script for this notebook!!!");

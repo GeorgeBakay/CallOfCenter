@@ -42,7 +42,7 @@ public class Controller : MonoBehaviour
         float curSpeedY = canMove ?  Input.GetAxis("Horizontal") : 0;
 
         Vector3 newMoveDirection = (forward * curSpeedX) + (right * curSpeedY);
-        //newMoveDirection.Normalize();
+        newMoveDirection.Normalize();
         newMoveDirection *= isRunning ? runSpeed : walkSpeed;
         moveDirection.x = newMoveDirection.x;
         moveDirection.z = newMoveDirection.z;
@@ -59,10 +59,11 @@ public class Controller : MonoBehaviour
         #endregion
  
         #region Handles Rotation
-        characterController.Move(moveDirection * Time.deltaTime);
+        
  
         if (canMove)
         {           
+            characterController.Move(moveDirection * Time.deltaTime);
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
